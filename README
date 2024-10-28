@@ -1,15 +1,15 @@
+---
+
 # Student Registration Number Updater
 
 This project is a Python-based tool for updating missing registration numbers in a student list Excel sheet. The tool reads an Excel file, identifies rows with missing entries in the "REGISTRATION NUMBER" column, and fills them sequentially. It also uses OpenAI’s API for any additional data restructuring or formatting.
 
 ## Features
-
 - **Automated Registration Number Generation**: Fills missing entries in the "REGISTRATION NUMBER" column sequentially, using the format "HIS/24/001", "HIS/24/002", etc.
 - **OpenAI API Integration**: Assists in checking data structure and formatting based on provided prompts.
 - **Easy Output**: Saves the updated file with completed registration numbers to a new Excel file.
 
 ## Requirements
-
 - Python 3.6 or later
 - **Pandas** for data manipulation
 - **OpenAI** API for additional data cleaning and formatting (optional)
@@ -17,14 +17,12 @@ This project is a Python-based tool for updating missing registration numbers in
 ## Setup
 
 1. Clone the repository or download the code:
-
    ```bash
    git clone <repository-url>
    cd student-registration-updater
    ```
 
 2. Install the required packages:
-
    ```bash
    pip install pandas openai
    ```
@@ -69,7 +67,6 @@ Here’s a prompt example that the script sends to OpenAI:
 The OpenAI API then verifies or suggests formatting updates.
 
 ## License
-
 This project is open-source and available under the [MIT License](LICENSE).
 
 ---

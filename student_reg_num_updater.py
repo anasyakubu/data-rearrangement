@@ -1,42 +1,24 @@
-import openai
 import pandas as pd
 
-# Set up OpenAI API key
-openai.api_key = "your_openai_api_key_here"
-
-# Load the spreadsheet
-file_path = "STUDENT LIST update.xlsx"
-data = pd.read_excel(file_path, sheet_name="Sheet1")
-
-# Define function to generate registration numbers
 def generate_registration_number(index):
-    return f"HIS/24/{index:03}"
+    """Generates a registration number with the format HIS/24/NNN."""
+    return f"HIS/24/{index:03d}"
 
-# Detect missing registration numbers and fill them
-start_index = 1  # Start from 1 if needed or adjust based on existing data
-data['REGISTRATION NUMBER'] = data['REGISTRATION NUMBER'].fillna(
-    pd.Series([generate_registration_number(i) for i in range(start_index, start_index + len(data[data['REGISTRATION NUMBER'].isna()]))])
-)
+def update_registration_numbers(file_path, sheet_name="Sheet1", output_path="Updated_STUDENT_LIST.xlsx"):
+    # Load the Excel file
+    data = pd.read_excel(file_path, sheet_name=sheet_name)
 
-# Optional: Use OpenAI API to assist in data reorganization or formatting feedback
-def clean_data_with_openai(prompt):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=100
-    )
-    return response.choices[0].text.strip()
+    # Find rows with missing registration numbers and fill them sequentially
+    current_index = 1  # Start from the first number (001)
+    for i in range(len(data)):
+        if pd.isna(data.at[i, "REGISTRATION NUMBER"]):  # Check if the registration number is missing
+            data.at[i, "REGISTRATION NUMBER"] = generate_registration_number(current_index)
+            current_index += 1  # Increment for the next student
 
-# Prepare a prompt for OpenAI API to verify data structure
-prompt = (
-    "Here is a dataset with student names, registration numbers, gender, and class. "
-    "Please ensure all fields are filled accurately. Missing fields should be filled sequentially in "
-    "'REGISTRATION NUMBER' starting from HIS/24/001."
-)
-cleaned_data = clean_data_with_openai(prompt)
+    # Save the updated data to a new Excel file
+    data.to_excel(output_path, index=False)
+    print(f"Updated file saved as '{output_path}'.")
 
-# Save the updated data to a new Excel file
-updated_file_path = "Updated_STUDENT_LIST.xlsx"
-data.to_excel(updated_file_path, index=False)
-
-print(f"Data has been updated and saved to {updated_file_path}")
+# Example usage
+file_path = "STUDENT LIST update.xlsx"  # Replace with your input file
+update_registration_numbers(file_path)
