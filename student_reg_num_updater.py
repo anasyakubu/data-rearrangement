@@ -20,5 +20,5 @@ def update_registration_numbers(file_path, sheet_name="Sheet1", output_path="Upd
     print(f"Updated file saved as '{output_path}'.")
 
 # Example usage
-file_path = "STUDENT LIST update.xlsx"  # Replace with your input file
+file_path = "STUDENT LIST.xlsx"  # Replace with your input file
 update_registration_numbers(file_path)
