@@ -1,8 +1,8 @@
 import pandas as pd
 
 def generate_registration_number(index):
-    """Generates a registration number with the format HIS/24/NNN."""
-    return f"HIS/24/{index:03d}"
+    """Generates a registration number with the format TSA/24/NNN."""
+    return f"TSA/24/{index:03d}"
 
 def update_registration_numbers(file_path, sheet_name="Sheet1", output_path="Updated_STUDENT_LIST.xlsx"):
     # Load the Excel file
@@ -20,5 +20,5 @@ def update_registration_numbers(file_path, sheet_name="Sheet1", output_path="Upd
     print(f"Updated file saved as '{output_path}'.")
 
 # Example usage
-file_path = "STUDENT LIST.xlsx"  # Replace with your input file
+file_path = "TANGAZA SECONDARY.xlsx"  # Replace with your input file
 update_registration_numbers(file_path)
