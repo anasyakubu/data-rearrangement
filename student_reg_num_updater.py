@@ -9,7 +9,7 @@ def update_registration_numbers(file_path, sheet_name="Sheet1", output_path="Upd
     data = pd.read_excel(file_path, sheet_name=sheet_name)
 
     # Find rows with missing registration numbers and fill them sequentially
-    current_index = 1  # Start from the first number (001)
+    current_index = 384  # Start from the first number (001)
     for i in range(len(data)):
         if pd.isna(data.at[i, "REGISTRATION NUMBER"]):  # Check if the registration number is missing
             data.at[i, "REGISTRATION NUMBER"] = generate_registration_number(current_index)
@@ -20,5 +20,5 @@ def update_registration_numbers(file_path, sheet_name="Sheet1", output_path="Upd
     print(f"Updated file saved as '{output_path}'.")
 
 # Example usage
-file_path = "TANGAZA SECONDARY.xlsx"  # Replace with your input file
+file_path = "TANGAZA NURSERY AND PRIMARY SCHOOL.xlsx"  # Replace with your input file
 update_registration_numbers(file_path)
