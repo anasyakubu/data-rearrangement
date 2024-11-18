@@ -1,15 +1,15 @@
 import pandas as pd
 
 def generate_registration_number(index):
-    """Generates a registration number with the format TSA/24/NNN."""
-    return f"TSA/24/{index:03d}"
+    """Generates a registration number with the format HIS/24/NNN."""
+    return f"HIS/24/{index:03d}"
 
 def update_registration_numbers(file_path, sheet_name="Sheet1", output_path="Updated_STUDENT_LIST.xlsx"):
     # Load the Excel file
     data = pd.read_excel(file_path, sheet_name=sheet_name)
 
     # Find rows with missing registration numbers and fill them sequentially
-    current_index = 1299  # Start from the first number (001)
+    current_index = 1635  # Start from the first number (001)
     for i in range(len(data)):
         if pd.isna(data.at[i, "REGISTRATION NUMBER"]):  # Check if the registration number is missing
             data.at[i, "REGISTRATION NUMBER"] = generate_registration_number(current_index)
@@ -20,5 +20,5 @@ def update_registration_numbers(file_path, sheet_name="Sheet1", output_path="Upd
     print(f"Updated file saved as '{output_path}'.")
 
 # Example usage
-file_path = "Copy of TANGAZA NURSERY AND PRIMARY SCHOOL.xlsx"  # Replace with your input file
+file_path = "PRE-NURSERY GREEN & PRE-NURSERY PINK.xlsx"  # Replace with your input file
 update_registration_numbers(file_path)
